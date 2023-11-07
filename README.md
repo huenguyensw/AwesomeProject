@@ -8,9 +8,10 @@ Welcome to the Sound Player App, a straightforward project designed to play a cu
 
 1. [Installation](#installation)
 2. [Getting Started](#Getting-Started)
-3. [Troubleshooting](#Troubleshooting)
-4. [Support](#Support)
-5. [Contributing](#Contributing)
+3. [Usage](#Usage)
+4. [Troubleshooting](#Troubleshooting)
+5. [Support](#Support)
+6. [Contributing](#Contributing)
 
 # Installation
 
@@ -82,6 +83,16 @@ You've successfully run and modified your React Native App. :partying_face:
 
 - If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
 - If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+
+# Usage
+
+To utilize the Sound Player App, follow these simple steps:
+
+1. Run the app on your device.
+2. Click on the 'Play' button to initiate playback.
+3. At any point, you can click the 'Pause' button to stop playback.
+
+Enjoy the seamless experience of listening to your curated list of sound files with the Sound Player App.
 
 # Troubleshooting
 
