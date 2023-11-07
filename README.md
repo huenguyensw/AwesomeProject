@@ -6,11 +6,11 @@ Welcome to the Sound Player App, a straightforward project designed to play a cu
 
 # Table of contents
 
-1. [Installation](#installation)
-2. [Getting Started](#Getting Started)
-3. [Troubleshooting](#Troubleshooting)
-4. [Support](#Support)
-5. [Contributing](#Contributing)
+[Installation](#installation)
+[Getting Started](#Getting Started)
+[Troubleshooting](#Troubleshooting)
+[Support](#Support)
+[Contributing](#Contributing)
 
 # Installation
 
