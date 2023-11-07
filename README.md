@@ -17,6 +17,7 @@ Welcome to the Sound Player App, a straightforward project designed to play a cu
 ```bash
 # using npm
 npm install
+```
 
 # Getting Started
 
