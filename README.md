@@ -5,13 +5,18 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 Welcome to the Sound Player App, a straightforward project designed to play a curated list of sound files seamlessly. With a simple interface, the app allows you to initiate playback, causing the system to sequentially play through the entire list of sounds from start to finish. Additionally, you have the flexibility to pause the playback at any moment, giving you control over your audio experience. Enjoy the simplicity and functionality of the Sound Player App as you explore and listen to your favorite sounds with ease.
 
 # Table of contents
-1. Installation:
-2. Second item
-3. Third item
+
+1. [Installation](#installation)
+2. [Getting Started](#Getting Started)
+3. [Troubleshooting](#Troubleshooting)
+4. [Support](#Support)
+5. [Contributing](#Contributing)
 
 # Installation
+
+```bash
 # using npm
-npm start
+npm install
 
 # Getting Started
 
@@ -90,3 +95,11 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+
+# Support
+
+If you have any questions or concerns, please don't hesitate contact me via my email: <hue.blue@gmail.com>
+
+# Contributing
+
+We welcome contributions from the community. If you come across any bugs or have suggestions for improvements, please contact me <hue.blue@gmail.com>
