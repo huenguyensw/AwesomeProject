@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, FlatList, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, FlatList, ScrollView, Image } from 'react-native';
 import Sound from 'react-native-sound';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faFileAudio, faPlayCircle, faPauseCircle } from '@fortawesome/free-solid-svg-icons';
@@ -128,6 +128,7 @@ const Home = () => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Sound Player App</Text>
+            <Image source={require('../assets/music.png')} alt='music-icon'/>
             <TouchableOpacity
                 onPress={() => handlePlayingSound()}
                 style={styles.btn}
