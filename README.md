@@ -7,7 +7,7 @@ Welcome to the Sound Player App, a straightforward project designed to play a cu
 # Table of contents
 
 [Installation](#installation)
-[Getting Started](#Getting Started)
+[Getting Started](#Getting-Started)
 [Troubleshooting](#Troubleshooting)
 [Support](#Support)
 [Contributing](#Contributing)
