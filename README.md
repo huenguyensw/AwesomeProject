@@ -15,10 +15,17 @@ Welcome to the Sound Player App, a straightforward project designed to play a cu
 
 # Installation
 
+### For iOS
+
 ```bash
 # using npm
 npm install
+gem install cocoapods
+run pod install
 ```
+
+### For Android
+
 
 # Getting Started
 
