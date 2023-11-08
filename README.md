@@ -20,6 +20,7 @@ Welcome to the Sound Player App, a straightforward project designed to play a cu
 ```bash
 # using npm
 npm install
+cd ios
 gem install cocoapods
 run pod install
 ```
