@@ -1,15 +1,20 @@
+import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import Home from './components/Home';
-
+import Home from './components/screens/Home';
+import { NavigationContainer } from '@react-navigation/native';
+import BottomtabNavigator from './components/navigators/BottomtabNavigator';
 
 const App = () => {
   
   
   return (
+    <NavigationContainer>
     <View style={styles.container}>
-      <Home />
+      <BottomtabNavigator/>
+      {/* <Home /> */}
     </View>
+    </NavigationContainer>
   );
 };
 
