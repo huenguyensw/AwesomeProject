@@ -15,6 +15,10 @@ Welcome to the Sound Player App, a straightforward project designed to play a cu
 
 # Installation
 
+#### Installing dependencies
+
+Access the link [Setting up the development environment](https://reactnative.dev/docs/environment-setup) to install dependencies.
+
 ### For iOS
 
 ```bash
