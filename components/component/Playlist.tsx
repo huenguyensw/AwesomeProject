@@ -13,8 +13,21 @@ const Playlist: React.FC<{ genres: any }> = ({ genres }) => {
     const [currentSound, setCurrentSound] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
     const [isSingleMode, setIsSingleMode] = useState(false);
+    const scrollViewRef = useRef<ScrollView>(null);
+    const [isLoop, setIsLoop] = useState(false);
 
+    const handleScrollEnd = (event: any) => {
+        const contentOffset = event.nativeEvent.contentOffset.x;
+        const currentIndex = Math.ceil(contentOffset / WIDTH);
 
+        // Check if the user stands on the last image and scroll to the first image
+        if (currentIndex === genres.length - 1  && isLoop) {
+            scrollViewRef.current?.scrollTo({ x: 0, animated: true });
+            setIsLoop(false);
+        } else if (currentIndex === genres.length - 1) {
+            setIsLoop(true);
+        }
+    };
     //Set the category of the sound that is to be played
     Sound.setCategory('Playback');
 
@@ -66,9 +79,6 @@ const Playlist: React.FC<{ genres: any }> = ({ genres }) => {
         }
     }, [currentSound, isPlaying]);
 
-    console.log('current', currentSound);
-    console.log('isPlaying', isPlaying);
-
     const onChange = (nativeEvent: any) => {
         if (nativeEvent) {
             const slide = Math.ceil(nativeEvent.contentOffset.x / nativeEvent.layoutMeasurement.width);
@@ -76,20 +86,20 @@ const Playlist: React.FC<{ genres: any }> = ({ genres }) => {
                 setImgActive(slide);
                 setCurrentSound(0);
                 setIsPlaying(false);
-            }
+            };
         }
     }
 
-    const handlePlaySingle = (item:any, index: any) =>{
+    const handlePlaySingle = (item: any, index: any) => {
         console.log('item', item)
-        if(isPlaying && !isSingleMode){ //stop if playing multiple
+        if (isPlaying && !isSingleMode) { //stop if playing multiple
             setIsSingleMode(true);
         };
         setCurrentSound(index);
         if (soundRef.current) {
             soundRef.current.release();
         };
-         soundRef.current = new Sound(item.address, error =>{
+        soundRef.current = new Sound(item.address, error => {
             if (error) {
                 console.error('Failed to load the sound:', error);
             } else {
@@ -106,18 +116,20 @@ const Playlist: React.FC<{ genres: any }> = ({ genres }) => {
                     }
                 })
             }
-         })
+        })
     }
 
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.wrap}>
                 <ScrollView
+                    ref={scrollViewRef}
                     onScroll={({ nativeEvent }) => onChange(nativeEvent)}
                     showsHorizontalScrollIndicator={false}
                     pagingEnabled
                     horizontal
                     style={styles.wrap}
+                    onScrollEndDrag={handleScrollEnd}
                 >
                     {genres.map((genre: any, index: any) =>
                         <Image
@@ -153,7 +165,7 @@ const Playlist: React.FC<{ genres: any }> = ({ genres }) => {
                 renderItem={({ item, index }) => (
                     <View style={styles.itemView}>
                         <FontAwesomeIcon icon={faFileAudio} color='white' size={30} />
-                        <TouchableOpacity onPress={()=>handlePlaySingle(item, index)}>
+                        <TouchableOpacity onPress={() => handlePlaySingle(item, index)}>
                             <Text
                                 style={[
                                     styles.text,
