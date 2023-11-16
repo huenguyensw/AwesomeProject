@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { Image, View, StyleSheet, ScrollView, SafeAreaView, Dimensions, Text, TouchableOpacity,FlatList} from 'react-native';
+import { Image, View, StyleSheet, ScrollView, SafeAreaView, Dimensions, Text, TouchableOpacity, FlatList } from 'react-native';
 import Sound from 'react-native-sound';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faFileAudio, faPlayCircle, faPauseCircle } from '@fortawesome/free-solid-svg-icons';
@@ -12,6 +12,7 @@ const Playlist: React.FC<{ genres: any }> = ({ genres }) => {
     const [imgActive, setImgActive] = useState(0);
     const [currentSound, setCurrentSound] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
+    const [isSingleMode, setIsSingleMode] = useState(false);
 
 
     //Set the category of the sound that is to be played
@@ -45,14 +46,15 @@ const Playlist: React.FC<{ genres: any }> = ({ genres }) => {
     const handlePlayingSound = () => {
 
         setIsPlaying(!isPlaying);
+        setIsSingleMode(false); //play button only apply for multiple mode
 
     }
 
     useEffect(() => {
 
-        if (isPlaying && (currentSound < genres[imgActive].list.length || currentSound == 0)) {
+        if (isPlaying && !isSingleMode && (currentSound < genres[imgActive].list.length || currentSound == 0)) {
             playSound();
-        } else if (isPlaying) {
+        } else if (isPlaying && !isSingleMode) {
             setCurrentSound(0);
             setIsPlaying(false);
         }
@@ -66,7 +68,6 @@ const Playlist: React.FC<{ genres: any }> = ({ genres }) => {
 
     console.log('current', currentSound);
     console.log('isPlaying', isPlaying);
-    console.log('image', imgActive)
 
     const onChange = (nativeEvent: any) => {
         if (nativeEvent) {
@@ -77,6 +78,35 @@ const Playlist: React.FC<{ genres: any }> = ({ genres }) => {
                 setIsPlaying(false);
             }
         }
+    }
+
+    const handlePlaySingle = (item:any, index: any) =>{
+        console.log('item', item)
+        if(isPlaying && !isSingleMode){ //stop if playing multiple
+            setIsSingleMode(true);
+        };
+        setCurrentSound(index);
+        if (soundRef.current) {
+            soundRef.current.release();
+        };
+         soundRef.current = new Sound(item.address, error =>{
+            if (error) {
+                console.error('Failed to load the sound:', error);
+            } else {
+                console.log('Sound loaded successfully');
+                console.log('duration in seconds: ' + soundRef.current?.getDuration() + ' and number of channels: ' + soundRef.current?.getNumberOfChannels());
+                soundRef.current?.play((success) => {
+                    if (success) {
+                        console.log('successfully finished playing');
+                        setIsPlaying(false);
+                        setCurrentSound(0);
+                    }
+                    else {
+                        console.error('Sound did not play');
+                    }
+                })
+            }
+         })
     }
 
     return (
@@ -99,6 +129,7 @@ const Playlist: React.FC<{ genres: any }> = ({ genres }) => {
                     )}
                 </ScrollView>
             </View>
+            <Text style={styles.text}> {genres[imgActive].name}</Text>
             <View style={styles.wrapDot}>
                 {genres.map((genre: any, index: any) =>
                     <Text
@@ -112,7 +143,7 @@ const Playlist: React.FC<{ genres: any }> = ({ genres }) => {
                 onPress={() => handlePlayingSound()}
                 style={styles.btn}
             >
-                {isPlaying && currentSound < genres[imgActive].list.length
+                {isPlaying && (isSingleMode || currentSound < genres[imgActive].list.length)
                     ? <FontAwesomeIcon icon={faPauseCircle} color='white' size={40} />
                     : <FontAwesomeIcon icon={faPlayCircle} color='white' size={40} />}
             </TouchableOpacity>
@@ -122,18 +153,20 @@ const Playlist: React.FC<{ genres: any }> = ({ genres }) => {
                 renderItem={({ item, index }) => (
                     <View style={styles.itemView}>
                         <FontAwesomeIcon icon={faFileAudio} color='white' size={30} />
-                        <Text 
-                            style={[
-                            styles.text,
-                            index === currentSound && isPlaying
-                                ? styles.textColor
-                                : null
-                            ]}
-                            numberOfLines={2}
-                            ellipsizeMode='tail'
-                        >
-                            {item.name}
-                        </Text>
+                        <TouchableOpacity onPress={()=>handlePlaySingle(item, index)}>
+                            <Text
+                                style={[
+                                    styles.text,
+                                    index === currentSound && isPlaying
+                                        ? styles.textColor
+                                        : null
+                                ]}
+                                numberOfLines={2}
+                                ellipsizeMode='tail'
+                            >
+                                {item.name}
+                            </Text>
+                        </TouchableOpacity>
                         <Image style={styles.menu} source={require('../../assets/menu.png')} />
                     </View>
                 )}
@@ -156,11 +189,11 @@ const styles = StyleSheet.create({
     },
     wrap: {
         width: WIDTH * 0.9,
-        height: HEIGHT * 0.25
+        height: HEIGHT * 0.3
     },
     wrapDot: {
         position: 'absolute',
-        bottom: '64%',
+        bottom: '52%',
         flexDirection: 'row',
         alignSelf: 'center'
     },
@@ -175,9 +208,9 @@ const styles = StyleSheet.create({
     btn: {
         borderWidth: 0,
         backgroundColor: '#282c3d',
-        marginTop: 45,
+        marginTop: '10%',
         marginBottom: 20,
-    },text: {
+    }, text: {
         color: 'white',
         fontSize: 18,
     },
@@ -193,7 +226,7 @@ const styles = StyleSheet.create({
     itemView: {
         flexDirection: 'row',
         columnGap: 15,
-        flexWrap:'nowrap',
+        flexWrap: 'nowrap',
         color: 'white',
         alignItems: 'center',
         justifyContent: 'flex-start',

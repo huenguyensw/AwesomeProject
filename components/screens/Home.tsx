@@ -17,7 +17,7 @@ interface GenreTye {
 const Home = () => {
     const initialGenresOfMusic = [
         {
-            name: 'jazzmusic',
+            name: 'Jazz music',
             path: require('../../assets/jazz.jpg'),
             list: [
                 {
@@ -79,7 +79,7 @@ const Home = () => {
             ]
         },
         {
-            name: 'popsmusic',
+            name: 'Pop music',
             path: require('../../assets/pop.jpg'),
             list: [
                 {
@@ -141,7 +141,7 @@ const Home = () => {
             ]
         },
         {
-            name: 'rocksmusic',
+            name: 'Rock music',
             path: require('../../assets/rock.jpg'),
             list: [
                 {
@@ -222,13 +222,13 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         backgroundColor: '#282c3d',
-        paddingTop: 20,
+        paddingTop: 30,
     },
     title: {
-        fontSize: 28,
+        fontSize: 24,
         fontWeight: 'normal',
         color: 'white',
         paddingBottom: 0,
-        marginBottom: 10,
+        marginBottom: 8,
     }
 })
