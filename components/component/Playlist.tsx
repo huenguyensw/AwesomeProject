@@ -60,6 +60,7 @@ const Playlist: React.FC<{ genres: any }> = ({ genres }) => {
 
         setIsPlaying(!isPlaying);
         setIsSingleMode(false); //play button only apply for multiple mode
+        setCurrentSound(0);
 
     }
 
@@ -92,9 +93,14 @@ const Playlist: React.FC<{ genres: any }> = ({ genres }) => {
 
     const handlePlaySingle = (item: any, index: any) => {
         console.log('item', item)
-        if (isPlaying && !isSingleMode) { //stop if playing multiple
-            setIsSingleMode(true);
-        };
+        // if (isPlaying && !isSingleMode) { //stop if playing multiple
+        //     setIsSingleMode(true);
+        // };
+        // if (!isPlaying){
+        //     setIsPlaying(true);
+        // }
+        setIsPlaying(true);
+        setIsSingleMode(true);
         setCurrentSound(index);
         if (soundRef.current) {
             soundRef.current.release();
@@ -118,6 +124,9 @@ const Playlist: React.FC<{ genres: any }> = ({ genres }) => {
             }
         })
     }
+
+    console.log('current', currentSound);
+    console.log('issingle', isSingleMode)
 
     return (
         <SafeAreaView style={styles.container}>
@@ -204,8 +213,8 @@ const styles = StyleSheet.create({
         height: HEIGHT * 0.3
     },
     wrapDot: {
-        position: 'absolute',
-        bottom: '52%',
+        // position: 'absolute',
+        // bottom: '52%',
         flexDirection: 'row',
         alignSelf: 'center'
     },
